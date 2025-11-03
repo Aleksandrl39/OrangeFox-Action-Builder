@@ -88,17 +88,6 @@ jobs:
         cd ${{ inputs.DEVICE_PATH }}
         echo "COMMIT_ID=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
-    - name: Sync OrangeFox Sources
-      run: |
-        cd ${GITHUB_WORKSPACE}/OrangeFox/fox_12.1
-        ./orangefox_sync.sh --sync
-        sleep 10
-        if [ ! -d "vendor/orangefox" ]; then
-        echo "ERROR: Failed to sync OrangeFox vendor"
-        exit 1
-        fi
-        echo "OrangeFox vendor synced successfully"    
-
     - name: Building OrangeFox
       run: |
         cd ${GITHUB_WORKSPACE}/OrangeFox/fox_${{ inputs.MANIFEST_BRANCH }}
